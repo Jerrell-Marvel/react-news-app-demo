@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { Routes, Route } from "react-router";
+import News from "./pages/news/News.js";
+import Home from "./pages/home/Home";
+import { Link } from "react-router-dom";
+import NewsDetails from "./pages/newsDetails/NewsDetails";
+import { useEffect } from "react";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        <Route
+          path="/"
+          element={<Home />}
+        />
+        <Route
+          path="/news"
+          element={<News />}
+        />
+        <Route
+          path="/news/:id"
+          element={<NewsDetails />}
+        />
+        <Route
+          path="/news/test"
+          element={<div>JUST TESTING</div>}
+        />
+      </Routes>
     </div>
   );
 }
