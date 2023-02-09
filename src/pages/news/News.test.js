@@ -4,6 +4,8 @@ import React from "react";
 import { BrowserRouter, MemoryRouter, Routes, Route, Redirect } from "react-router-dom";
 import News from "./News";
 import newsData from "../../data/newsData.json";
+import App from "../../App";
+import { renderWithRouter } from "../../test-utils/testUtils";
 
 describe("News", () => {
   test("Renders Loading... text before api loads", () => {
@@ -37,12 +39,7 @@ describe("News", () => {
 
   newsData.forEach((data) => {
     test(`Navigate to correct NewsDetails page (/news/${data.id} for news item of id ${data.id})`, async () => {
-      const user = userEvent.setup();
-      render(
-        <BrowserRouter>
-          <News />
-        </BrowserRouter>
-      );
+      const { user } = renderWithRouter(<App />, { route: "/news" });
       const newsItem = await screen.findByTestId(data.id);
       await user.click(newsItem);
 

@@ -9,19 +9,22 @@ import { RouterProvider, createMemoryRouter } from "react-router-dom";
 import App from "./App";
 import News from "./pages/news/News";
 import NewsDetails from "./pages/newsDetails/NewsDetails";
+import { renderWithRouter } from "./test-utils/testUtils";
 
 describe("Routing system", () => {
   test("Navigate to /news page when clicking find news link", async () => {
-    const history = createMemoryHistory();
-    render(
-      <Router
-        location={history.location}
-        navigator={history}
-      >
-        <App />
-      </Router>
-    );
-    const user = userEvent.setup();
+    // const history = createMemoryHistory();
+    // render(
+    //   <Router
+    //     location={history.location}
+    //     navigator={history}
+    //   >
+    //     <App />
+    //   </Router>
+    // );
+    // const user = userEvent.setup();
+
+    const { user } = renderWithRouter(<App />);
     const link = screen.getByText(/find news/i);
     await user.click(link);
     const newsText = screen.getByText(/test/i);
