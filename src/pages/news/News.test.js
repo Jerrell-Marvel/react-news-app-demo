@@ -9,23 +9,14 @@ import { renderWithRouter } from "../../test-utils/testUtils";
 
 describe("News", () => {
   test("Renders Loading... text before api loads", () => {
-    render(
-      <BrowserRouter>
-        <News />
-      </BrowserRouter>
-    );
+    const { user } = renderWithRouter(<App />, { route: "/news" });
 
     const loadingText = screen.getByText(/Loading/i);
     expect(loadingText).toBeInTheDocument();
   });
 
   test("Renders all lists of 10 news", async () => {
-    render(
-      <BrowserRouter>
-        <News />
-      </BrowserRouter>
-    );
-    render(<News />);
+    const { user } = renderWithRouter(<App />, { route: "/news" });
 
     const newsListItems = await screen.findAllByRole(
       "listitem",
